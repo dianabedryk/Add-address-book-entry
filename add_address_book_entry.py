@@ -12,7 +12,7 @@ class add_address_book(unittest.TestCase):
     def test_add_address_book(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd)
+        self.login("admin", "secret", wd)
         self.open_add_new(wd)
         self.fill_add_address_book_entry(wd)
         self.submit_add_address_book_entry(wd)
@@ -99,12 +99,12 @@ class add_address_book(unittest.TestCase):
     def open_add_new(self, wd):
         wd.find_element_by_link_text("add new").click()
 
-    def login(self, wd):
+    def login(self, username, password, wd):
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys("%s" % username)
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys("%s" % password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self, wd):
