@@ -21,6 +21,20 @@ class add_address_book(unittest.TestCase):
         self.return_to_home_page(wd)
         self.logout(wd)
 
+    def test_add_empty_address_book(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.open_add_new(wd)
+        self.fill_add_address_book_entry(wd, firstname="", middlename="", lastname="", nickname="",
+                                         title="", company="", address="", home="", mobil="",
+                                         work="", fax="", email="", homepage="", bday="",
+                                         bmonth="-", byear="", aday="", amonth="-",
+                                         ayear="", address2="", phone2="", notes="")
+        self.submit_add_address_book_entry(wd)
+        self.return_to_home_page(wd)
+        self.logout(wd)
+
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
@@ -74,19 +88,15 @@ class add_address_book(unittest.TestCase):
         wd.find_element_by_name("homepage").send_keys(homepage)
         wd.find_element_by_name("bday").click()
         Select(wd.find_element_by_name("bday")).select_by_visible_text(bday)
-        wd.find_element_by_xpath("//option[@value='12']").click()
         wd.find_element_by_name("bmonth").click()
         Select(wd.find_element_by_name("bmonth")).select_by_visible_text(bmonth)
-        wd.find_element_by_xpath("//option[@value='March']").click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(byear)
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text(aday)
-        wd.find_element_by_xpath("//div[@id='content']/form/select[3]/option[12]").click()
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(amonth)
-        wd.find_element_by_xpath("//div[@id='content']/form/select[4]/option[3]").click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(ayear)
